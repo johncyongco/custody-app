@@ -9,6 +9,7 @@ import LifeVersesPage from "@/pages/LifeVersesPage";
 import ConsecrationStatusPage from "@/pages/ConsecrationStatusPage";
 import FriendsOfTheSpiritPage from "@/pages/FriendsOfTheSpiritPage";
 import BookOfPraisePage from "@/pages/BookOfPraisePage";
+import NovenaPage from "@/pages/NovenaPage";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/consecration-status" element={<ConsecrationStatusPage />} />
           <Route path="/friends-of-the-spirit" element={<FriendsOfTheSpiritPage />} />
           <Route path="/magnify" element={<BookOfPraisePage />} />
+          <Route path="/novena" element={<NovenaPage />} />
         </Routes>
 
         <BottomNav />

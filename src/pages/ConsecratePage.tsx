@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { X, Wind, BookHeart, Flame, ChevronRight } from "lucide-react";
+import { X, Wind, BookHeart, Flame, ChevronRight, Church } from "lucide-react";
 import { holySymbols } from "@/data/holy-symbols";
 import type { HolySymbol } from "@/types";
 export default function ConsecratePage() {
@@ -56,7 +56,6 @@ export default function ConsecratePage() {
             </div>
             <div>
               <span className="label-trace block">Symbols of the Spirit</span>
-              <span className="text-[10px] font-semibold text-holy-periwinkle tracking-wide uppercase">Choose one to consecrate</span>
             </div>
           </div>
 
@@ -141,6 +140,31 @@ export default function ConsecratePage() {
               </span>
             ))}
           </div>
+        </motion.button>
+
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          onClick={() => navigate("/novena")}
+          className="glass-card mb-8 w-full text-left group"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
+                <Church size={14} className="text-holy-periwinkle" />
+              </div>
+              <div>
+                <span className="label-trace block">Novena to the Holy Spirit</span>
+                <span className="text-[10px] font-semibold text-holy-periwinkle tracking-wide uppercase">Ascension to Pentecost</span>
+              </div>
+            </div>
+            <ChevronRight size={18} className="text-text-muted group-hover:translate-x-0.5 transition-transform shrink-0" strokeWidth={1.5} />
+          </div>
+
+          <p className="text-body text-text-secondary leading-relaxed">
+            The oldest of all novenas. Pray the nine days before Pentecost for the seven gifts of the Holy Spirit.
+          </p>
         </motion.button>
       </div>
 
