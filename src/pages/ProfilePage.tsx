@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bookmark, BookOpen, Heart, BarChart3, Settings, User, ChevronRight, CheckCircle, Church, ArrowLeft, ArrowRight, Globe } from "lucide-react";
+import { BookOpen, Heart, Settings, User, ChevronRight, CheckCircle, Church, ArrowLeft, ArrowRight, Globe } from "lucide-react";
 import { useUIStore } from "@/stores/ui-store";
 import { useTraceStore, computeDailyFaithfulness } from "@/stores/trace-store";
 import { faculties } from "@/data/faculties";
@@ -10,18 +10,9 @@ const menuSections = [
   {
     label: "Spiritual Life",
     items: [
-      { icon: BookOpen, label: "Rule of Life", color: "text-holy-periwinkle", href: "" },
       { icon: Heart, label: "Consecration Status", color: "text-holy-periwinkle", href: "/consecration-status" },
-      { icon: Bookmark, label: "Prayer Library", color: "text-morning-blue", href: "" },
       { icon: BookOpen, label: "Favourite Scriptures", color: "text-morning-blue", href: "/life-verses" },
       { icon: Church, label: "Friends of the Holy Spirit", color: "text-holy-periwinkle", href: "/friends-of-the-spirit" },
-    ],
-  },
-  {
-    label: "Reflection",
-    items: [
-      { icon: Bookmark, label: "Bookmarks", color: "text-holy-periwinkle", href: "" },
-      { icon: BarChart3, label: "Insights", color: "text-holy-periwinkle", href: "" },
     ],
   },
   {
