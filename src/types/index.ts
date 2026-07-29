@@ -12,15 +12,12 @@ export interface TraceEntry {
 
 export type Faculty =
   | "mind"
-  | "left eye"
-  | "right eye"
-  | "left ear"
-  | "right ear"
+  | "eyes"
+  | "ears"
   | "nose"
   | "mouth"
   | "heart"
-  | "left hand"
-  | "right hand"
+  | "hands"
   | "feet"
   | "whole body";
 
