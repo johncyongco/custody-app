@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Wind, Heart } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, BookOpen, Heart, Flame, BookHeart, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUIStore } from "@/stores/ui-store";
 
@@ -17,9 +17,9 @@ const dailyFruits = [
 ];
 
 const quickActions = [
-  { icon: BookOpen, label: "Life Verse", color: "text-holy-periwinkle", href: "/life-verses" },
-  { icon: Wind, label: "Breathing Prayer", color: "text-morning-blue", href: "/map" },
-  { icon: Heart, label: "Quick Trace", color: "text-holy-periwinkle", href: "/custody" },
+  { icon: Flame, label: "Pentecost Mode", color: "text-orange-500" },
+  { icon: BookHeart, label: "Magnify", color: "text-rose-500", href: "/magnify" },
+  { icon: Heart, label: "Quick Custody", color: "text-holy-periwinkle", href: "/custody" },
 ];
 
 export default function HomePage() {
@@ -29,6 +29,45 @@ export default function HomePage() {
     verses.length > 0 ? Math.floor(Math.random() * verses.length) : 0
   );
   const todayFruit = dailyFruits[new Date().getDay()];
+
+  const [timer, setTimer] = useState(1200);
+  const [isRunning, setIsRunning] = useState(false);
+  const [pentecostActive, setPentecostActive] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (isRunning) {
+      intervalRef.current = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            setIsRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isRunning]);
+
+  const resetTimer = () => {
+    setIsRunning(false);
+    setTimer(1200);
+  };
+
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
+  const progress = ((1200 - timer) / 1200) * 100;
+
+  const handleQuickAction = (action: typeof quickActions[number]) => {
+    if (action.label === "Pentecost Mode") {
+      setPentecostActive(true);
+    } else if (action.href) {
+      navigate(action.href);
+    }
+  };
 
   return (
     <div className="min-h-screen pb-28 relative">
@@ -139,7 +178,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                onClick={() => navigate(action.href)}
+                onClick={() => handleQuickAction(action)}
                 className="glass-card-sm flex flex-col items-center gap-2 py-5 hover:bg-white/50 transition-all duration-300"
               >
                 <Icon size={20} className={action.color} />
@@ -150,6 +189,8 @@ export default function HomePage() {
             );
           })}
         </div>
+
+
 
         <motion.button
           initial={{ opacity: 0, y: 20 }}
@@ -171,6 +212,95 @@ export default function HomePage() {
           Your body is sacred ground.
         </motion.p>
       </div>
+
+      <AnimatePresence>
+        {pentecostActive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          >
+            <div className="absolute inset-0 bg-text/85 backdrop-blur-md" onClick={() => setPentecostActive(false)} />
+
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
+            >
+              <source src="/pentecost-mode-fire.mov" type="video/quicktime" />
+            </video>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.4 }}
+              className="relative z-10 flex flex-col items-center gap-8"
+            >
+              <button
+                onClick={() => { setPentecostActive(false); setIsRunning(false); resetTimer(); }}
+                className="absolute -top-12 right-0 p-2 text-white/60 hover:text-white transition-colors"
+              >
+                <X size={20} strokeWidth={1.5} />
+              </button>
+
+              <div className="flex flex-col items-center gap-2">
+                <Flame size={32} className="text-orange-400 drop-shadow-[0_0_12px_rgba(251,146,60,0.6)]" />
+                <h2 className="text-h2 text-white font-bold">Pentecost Mode</h2>
+                <p className="text-body text-white/60 text-center max-w-xs">
+                  Pray, and wait in silence for the Holy Spirit. The Holy Spirit is waiting for you too.
+                </p>
+              </div>
+
+              <div className="relative w-40 h-40">
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="2" />
+                  <motion.circle
+                    cx="18" cy="18" r="15.5" fill="none"
+                    stroke="rgba(251,146,60,0.9)" strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeDasharray={97.4}
+                    strokeDashoffset={97.4 - (progress / 100) * 97.4}
+                    initial={false}
+                  />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-h1 text-white font-bold tabular-nums drop-shadow-lg">
+                    {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+                  </span>
+                  <span className="text-caption text-white/50 mt-0.5">of silence</span>
+                </div>
+              </div>
+
+              {!isRunning && timer === 1200 && (
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  onClick={() => setIsRunning(true)}
+                  className="px-8 py-3.5 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 text-white font-bold tracking-wide uppercase text-[13px] hover:scale-105 active:scale-95 transition-all shadow-lg shadow-orange-500/30"
+                >
+                  Start and Pray
+                </motion.button>
+              )}
+
+              {timer === 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center"
+                >
+                  <p className="text-body text-white/70 italic leading-relaxed">
+                    "The Holy Spirit is the silence of God. In waiting, you are not alone — He waits with you."
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
