@@ -76,12 +76,9 @@ export default function ConsecratePage() {
                   setSelected(symbol.id);
                   setTab("meaning");
                 }}
-                className="flex flex-col items-center gap-1.5 transition-all duration-300 hover:scale-105 active:scale-95"
+                className="flex flex-col items-center transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                <img src={symbol.icon} alt={symbol.title} className="w-full aspect-square object-contain max-w-[80px]" />
-                <span className="text-[11px] font-semibold text-text text-center">
-                  {symbol.title}
-                </span>
+                <img src={symbol.icon} alt={symbol.title} className="w-full aspect-square object-contain max-w-[120px]" />
               </motion.button>
             ))}
           </div>
