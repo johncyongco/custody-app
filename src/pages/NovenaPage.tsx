@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, ChevronLeft, ChevronRight } from "lucide-react";
+import { Flame, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const days = [
   {
@@ -87,13 +88,14 @@ const days = [
 ];
 
 const prayersToRecite = [
+  "Act of Consecration & Prayer for the Seven Gifts",
   "Our Father (once)",
   "Hail Mary (once)",
   "Glory Be (7 times)",
-  "Act of Consecration & Prayer for the Seven Gifts",
 ];
 
 export default function NovenaPage() {
+  const navigate = useNavigate();
   const [currentDay, setCurrentDay] = useState(0);
   const [showConsecration, setShowConsecration] = useState(false);
   const [showSevenGifts, setShowSevenGifts] = useState(false);
@@ -103,6 +105,12 @@ export default function NovenaPage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

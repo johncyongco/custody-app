@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { X, Wind, BookHeart, Flame, ChevronRight, Church } from "lucide-react";
+import { X, BookHeart, Flame, ChevronRight, Church, ArrowLeft, Sparkles } from "lucide-react";
 import { holySymbols } from "@/data/holy-symbols";
 import type { HolySymbol } from "@/types";
 export default function ConsecratePage() {
@@ -44,6 +44,12 @@ export default function ConsecratePage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -91,7 +97,7 @@ export default function ConsecratePage() {
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
-                <Wind size={14} className="text-orange-500" />
+                <Flame size={14} className="text-orange-500" />
               </div>
               <div>
                 <span className="label-trace block">Pentecost Mode</span>
@@ -164,6 +170,31 @@ export default function ConsecratePage() {
 
           <p className="text-body text-text-secondary leading-relaxed">
             The oldest of all novenas. Pray the nine days before Pentecost for the seven gifts of the Holy Spirit.
+          </p>
+        </motion.button>
+
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          onClick={() => navigate("/chaplet")}
+          className="glass-card mb-8 w-full text-left group"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center">
+                <Sparkles size={14} className="text-violet-600" />
+              </div>
+              <div>
+                <span className="label-trace block">Chaplet of the Holy Spirit</span>
+                <span className="text-[10px] font-semibold text-violet-600 tracking-wide uppercase">St. Elena Guerra</span>
+              </div>
+            </div>
+            <ChevronRight size={18} className="text-text-muted group-hover:translate-x-0.5 transition-transform shrink-0" strokeWidth={1.5} />
+          </div>
+
+          <p className="text-body text-text-secondary leading-relaxed">
+            Pray the seven invocations to the Holy Spirit composed by Bl. Elena Guerra for a New Pentecost.
           </p>
         </motion.button>
       </div>

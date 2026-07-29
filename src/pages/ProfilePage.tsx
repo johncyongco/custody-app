@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bookmark, BookOpen, Heart, BarChart3, Settings, User, ChevronRight, CheckCircle, Church } from "lucide-react";
+import { Bookmark, BookOpen, Heart, BarChart3, Settings, User, ChevronRight, CheckCircle, Church, ArrowLeft } from "lucide-react";
 import { useUIStore } from "@/stores/ui-store";
 import { useTraceStore, computeDailyFaithfulness } from "@/stores/trace-store";
 import { faculties } from "@/data/faculties";
@@ -69,6 +69,12 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

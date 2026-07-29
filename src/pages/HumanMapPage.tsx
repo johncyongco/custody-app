@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle } from "lucide-react";
+import { X, CheckCircle, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { faculties } from "@/data/faculties";
 import { useTraceStore } from "@/stores/trace-store";
 import type { Faculty } from "@/types";
 
 const hotspotPositions: Partial<Record<Faculty, { top: string; left: string }>> = {
   mind:       { top: "13%", left: "50%" },
+  eyes:       { top: "18%", left: "66%" },
+  ears:       { top: "24%", left: "72%" },
   nose:       { top: "20%", left: "29%" },
   mouth:      { top: "26%", left: "29%" },
-  "right eye":  { top: "18%", left: "66%" },
-  "right ear":  { top: "24%", left: "72%" },
   heart:      { top: "35%", left: "50%" },
-  "right hand": { top: "50%", left: "75%" },
+  hands:      { top: "50%", left: "75%" },
   feet:       { top: "86%", left: "49%" },
   "whole body": { top: "50%", left: "50%" },
 };
 
 export default function HumanMapPage() {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState<Faculty | null>(null);
   const { entries, addEntry } = useTraceStore();
 
@@ -51,6 +53,12 @@ export default function HumanMapPage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -97,7 +105,7 @@ export default function HumanMapPage() {
                     }`}
                     style={{ top: pos.top, left: pos.left }}
                   >
-                    {faculty === "whole body" ? "Body" : faculty === "right hand" ? "Hands" : faculty === "right eye" ? "Eyes" : faculty === "right ear" ? "Ears" : faculty.charAt(0).toUpperCase() + faculty.slice(1)}
+                    {faculty === "whole body" ? "Body" : faculty.charAt(0).toUpperCase() + faculty.slice(1)}
                   </motion.button>
                 );
               })}

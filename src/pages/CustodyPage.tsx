@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, X } from "lucide-react";
+import { Plus, X, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useTraceStore } from "@/stores/trace-store";
 import { faculties } from "@/data/faculties";
 import type { Faculty } from "@/types";
@@ -30,6 +31,7 @@ const fruitOptions = [
 ];
 
 export default function CustodyPage() {
+  const navigate = useNavigate();
   const { entries, addEntry, removeEntry } = useTraceStore();
   const custodyEntries = entries.filter((e) => e.movement !== "Consecrated to the Holy Spirit");
   const [showForm, setShowForm] = useState(false);
@@ -60,6 +62,12 @@ export default function CustodyPage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -160,7 +168,7 @@ export default function CustodyPage() {
                 <div>
                   <label className="label-trace block mb-2">Faculty</label>
                   <div className="flex flex-wrap gap-2">
-                    {faculties.filter((f) => !["left eye", "left ear", "left hand"].includes(f.id)).map((f) => (
+                    {faculties.map((f) => (
                       <button
                         key={f.id}
                         onClick={() => setFaculty(f.id)}

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { CheckCircle, Flame, Scroll, Shield, Crown, Star, Heart } from "lucide-react";
+import { CheckCircle, Flame, Scroll, Shield, Crown, Star, Heart, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useTraceStore, computeDailyFaithfulness } from "@/stores/trace-store";
 import { faculties } from "@/data/faculties";
 
@@ -20,12 +21,14 @@ const achievements = [
     title: "Living Temple",
     description: "Consecrate every faculty of your being.",
     check: (entries: ReturnType<typeof useTraceStore.getState>["entries"]) => {
-      const consecrated = new Set(
+      const consecratedLabels = new Set(
         entries
           .filter((e) => e.movement === "Consecrated to the Holy Spirit")
-          .map((e) => e.faculty)
+          .map((e) => faculties.find((f) => f.id === e.faculty)?.label)
+          .filter(Boolean)
       );
-      return faculties.filter((f) => !["left eye", "left ear", "left hand"].includes(f.id)).every((f) => consecrated.has(f.id));
+      const allLabels = faculties.map((f) => f.label);
+      return allLabels.every((label) => consecratedLabels.has(label));
     },
     color: "text-rose-500",
     bg: "bg-rose-50/60",
@@ -83,11 +86,18 @@ const achievements = [
 ];
 
 export default function ConsecrationStatusPage() {
+  const navigate = useNavigate();
   const { entries } = useTraceStore();
 
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

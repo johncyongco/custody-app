@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Music, X, ChevronRight, Languages } from "lucide-react";
+import { BookOpen, Music, X, ChevronRight, Languages, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { praiseLanguages } from "@/data/book-of-praise";
 import type { LanguagePrayer } from "@/data/book-of-praise";
 
@@ -16,6 +17,7 @@ const hymns = [
 type Tab = "prayers" | "hymns" | "languages";
 
 export default function BookOfPraisePage() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("prayers");
   const [selected, setSelected] = useState<LanguagePrayer | null>(null);
   const [prayerType, setPrayerType] = useState<"ourFather" | "hailMary" | "gloryBe">("ourFather");
@@ -24,6 +26,12 @@ export default function BookOfPraisePage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

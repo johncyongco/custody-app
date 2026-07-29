@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, X, BookOpen, Quote } from "lucide-react";
+import { Plus, X, BookOpen, Quote, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useUIStore } from "@/stores/ui-store";
 
 export default function LifeVersesPage() {
+  const navigate = useNavigate();
   const { verses, addVerse, removeVerse } = useUIStore();
   const [showForm, setShowForm] = useState(false);
   const [reference, setReference] = useState("");
@@ -20,6 +22,12 @@ export default function LifeVersesPage() {
   return (
     <div className="min-h-screen pb-28">
       <div className="px-6 pt-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-6"
+        >
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
