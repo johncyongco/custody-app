@@ -1,3 +1,16 @@
+const OLD_FACULTY_MAP: Record<string, Faculty> = {
+  "left eye": "eyes",
+  "right eye": "eyes",
+  "left ear": "ears",
+  "right ear": "ears",
+  "left hand": "hands",
+  "right hand": "hands",
+};
+
+export function normalizeFaculty(id: string): Faculty {
+  return OLD_FACULTY_MAP[id] || (id as Faculty);
+}
+
 export interface TraceEntry {
   id: string;
   faculty: Faculty;

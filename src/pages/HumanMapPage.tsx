@@ -4,6 +4,7 @@ import { X, CheckCircle, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { faculties } from "@/data/faculties";
 import { useTraceStore } from "@/stores/trace-store";
+import { normalizeFaculty } from "@/types";
 import type { Faculty } from "@/types";
 
 const hotspotPositions: Partial<Record<Faculty, { top: string; left: string }>> = {
@@ -31,7 +32,7 @@ export default function HumanMapPage() {
   const isConsecrated = (id: Faculty) =>
     entries.some(
       (e) =>
-        e.faculty === id &&
+        normalizeFaculty(e.faculty) === id &&
         e.movement === "Consecrated to the Holy Spirit" &&
         isToday(e.created_at)
     );

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { TraceEntry } from "@/types";
+import { normalizeFaculty } from "@/types";
 import { faculties } from "@/data/faculties";
 
 interface TraceState {
@@ -24,7 +25,7 @@ function isFullyConsecratedDay(dayEntries: TraceEntry[]): boolean {
   const consecrated = new Set<string>();
   for (const e of dayEntries) {
     if (e.movement === "Consecrated to the Holy Spirit") {
-      consecrated.add(labelMap[e.faculty]);
+      consecrated.add(labelMap[normalizeFaculty(e.faculty)]);
     }
   }
   return allLabels.size > 0 && allLabels.size === consecrated.size;
