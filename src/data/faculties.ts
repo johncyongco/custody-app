@@ -1,0 +1,88 @@
+import type { FacultyInfo } from "@/types";
+
+export const faculties: FacultyInfo[] = [
+  {
+    id: "mind",
+    label: "Mind",
+    description: "Thoughts, imagination, memory, understanding, and will. The seat of discernment and choice.",
+    scripture: "Do not be conformed to this world, but be transformed by the renewal of your mind. — Romans 12:2",
+    consecration: "Come, Holy Spirit, fill my mind and will with Your light. I consecrate my thoughts, imagination, understanding, and will to You. May every thought be brought into captivity to Christ, and may my will choose only what pleases You. Take my mind and will and make them a sanctuary of wisdom.",
+  },
+  {
+    id: "left eye",
+    label: "Eyes",
+    description: "The eye that receives light. What you allow yourself to see shapes your soul.",
+    scripture: "The eye is the lamp of the body. If your eye is healthy, your whole body is full of light. — Matthew 6:22",
+    consecration: "Come, Holy Spirit, fill my eyes with Your purity. I consecrate my sight to You. Guard my eyes from vanity and impurity; let them behold the beauty of holiness and the needs of my neighbor. Take my eyes and make them windows of Your light.",
+  },
+  {
+    id: "right eye",
+    label: "Eyes",
+    description: "The eye that discerns. Guard what you gaze upon, for your whole body follows.",
+    scripture: "If your right eye causes you to sin, tear it out and throw it away. — Matthew 5:29",
+    consecration: "Come, Holy Spirit, fill my eyes with Your purity. I consecrate my sight to You. Guard my eyes from vanity and impurity; let them behold the beauty of holiness and the needs of my neighbor. Take my eyes and make them windows of Your light.",
+  },
+  {
+    id: "left ear",
+    label: "Ears",
+    description: "The ear that receives. Listening is the first language of love.",
+    scripture: "He who has ears to hear, let him hear. — Matthew 11:15",
+    consecration: "Come, Holy Spirit, fill my ears with Your attentiveness. I consecrate my hearing to You. Help me listen with patience and discernment, turning away from gossip and harmful speech. Take my ears and make them attentive to Your voice.",
+  },
+  {
+    id: "right ear",
+    label: "Ears",
+    description: "The ear that discerns. Guard what you permit to enter through sound.",
+    scripture: "Let the wise listen and add to their learning. — Proverbs 1:5",
+    consecration: "Come, Holy Spirit, fill my ears with Your attentiveness. I consecrate my hearing to You. Help me listen with patience and discernment, turning away from gossip and harmful speech. Take my ears and make them attentive to Your voice.",
+  },
+  {
+    id: "nose",
+    label: "Nose",
+    description: "The breath of life. The sense that discerns the fragrance of holiness.",
+    scripture: "For we are the aroma of Christ to God among those who are being saved. — 2 Corinthians 2:15",
+    consecration: "Come, Holy Spirit, fill my sense of smell with Your fragrance. I consecrate my breath and my nostrils to You. May I breathe in Your peace and exhale Your praise. Take my breath and make it a living incense before You.",
+  },
+  {
+    id: "mouth",
+    label: "Mouth",
+    description: "Speech, taste, words of blessing or curse. The gate of nourishment and expression.",
+    scripture: "Death and life are in the power of the tongue. — Proverbs 18:21",
+    consecration: "Come, Holy Spirit, fill my mouth with Your grace. I consecrate my speech and taste to You. May my words bring life, kindness, and truth. Guard my tongue from gossip and harshness. Take my mouth and make it an instrument of Your peace.",
+  },
+  {
+    id: "heart",
+    label: "Heart",
+    description: "Affections, emotions, desires, and the core of your being.",
+    scripture: "Create in me a clean heart, O God, and renew a right spirit within me. — Psalm 51:10",
+    consecration: "Come, Holy Spirit, fill my heart with Your love. I consecrate my affections, desires, and emotions to You. Purify my heart and make it Your dwelling place. Take my heart and set it ablaze with charity.",
+  },
+  {
+    id: "left hand",
+    label: "Hands",
+    description: "The receiving hand. What you hold, what you release, what you offer in stillness.",
+    scripture: "Whatever your hand finds to do, do it with all your might. — Ecclesiastes 9:10",
+    consecration: "Come, Holy Spirit, fill my hands with Your strength. I consecrate my work and service to You. May everything I build, offer, and create be for Your glory. Take my hands and make them instruments of Your mercy.",
+  },
+  {
+    id: "right hand",
+    label: "Hands",
+    description: "The acting hand. Work, service, creativity, and acts of love. What you build and offer.",
+    scripture: "Let your left hand not know what your right hand is doing. — Matthew 6:3",
+    consecration: "Come, Holy Spirit, fill my hands with Your strength. I consecrate my work and service to You. May everything I build, offer, and create be for Your glory. Take my hands and make them instruments of Your mercy.",
+  },
+  {
+    id: "feet",
+    label: "Feet",
+    description: "Where you go, your path, and the steps you take each day.",
+    scripture: "How beautiful upon the mountains are the feet of him who brings good news. — Isaiah 52:7",
+    consecration: "Come, Holy Spirit, fill my feet with Your direction. I consecrate my steps and my path to You. Lead me where You want me to go; guide my feet toward peace and away from temptation. Take my feet and make them bearers of good news.",
+  },
+  {
+    id: "whole body",
+    label: "Whole Body",
+    description: "The temple of the Holy Spirit. Your entire being consecrated to God.",
+    scripture: "Do you not know that your body is a temple of the Holy Spirit within you? — 1 Corinthians 6:19",
+    consecration: "Come, Holy Spirit, fill my whole being with Your presence. I consecrate my entire body, soul, and spirit to You. You are the temple; I am Your dwelling place. Take every faculty, every member, every breath, and make them Yours forever.",
+  },
+];
