@@ -90,12 +90,12 @@ export default function ConsecratePage() {
         >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
-                <Wind size={14} className="text-holy-periwinkle" />
+              <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                <Wind size={14} className="text-orange-500" />
               </div>
               <div>
                 <span className="label-trace block">Pentecost Mode</span>
-                <span className="text-[10px] font-semibold text-holy-periwinkle tracking-wide uppercase">Wait in silence</span>
+                <span className="text-[10px] font-semibold text-orange-500 tracking-wide uppercase">Wait in silence</span>
               </div>
             </div>
             <ChevronRight size={18} className="text-text-muted group-hover:translate-x-0.5 transition-transform shrink-0" strokeWidth={1.5} />
@@ -115,12 +115,12 @@ export default function ConsecratePage() {
         >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
-                <BookHeart size={14} className="text-holy-periwinkle" />
+              <div className="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center">
+                <BookHeart size={14} className="text-rose-500" />
               </div>
               <div>
                 <span className="label-trace block">Magnify</span>
-                <span className="text-[10px] font-semibold text-holy-periwinkle tracking-wide uppercase">Book of Praises</span>
+                <span className="text-[10px] font-semibold text-rose-500 tracking-wide uppercase">Book of Praises</span>
               </div>
             </div>
             <ChevronRight size={18} className="text-text-muted group-hover:translate-x-0.5 transition-transform shrink-0" strokeWidth={1.5} />
@@ -151,12 +151,12 @@ export default function ConsecratePage() {
         >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
-                <Church size={14} className="text-holy-periwinkle" />
+              <div className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                <Church size={14} className="text-yellow-600" />
               </div>
               <div>
                 <span className="label-trace block">Novena to the Holy Spirit</span>
-                <span className="text-[10px] font-semibold text-holy-periwinkle tracking-wide uppercase">Ascension to Pentecost</span>
+                <span className="text-[10px] font-semibold text-yellow-600 tracking-wide uppercase">Ascension to Pentecost</span>
               </div>
             </div>
             <ChevronRight size={18} className="text-text-muted group-hover:translate-x-0.5 transition-transform shrink-0" strokeWidth={1.5} />
