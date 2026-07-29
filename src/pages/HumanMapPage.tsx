@@ -6,7 +6,7 @@ import { faculties } from "@/data/faculties";
 import { useTraceStore } from "@/stores/trace-store";
 import type { Faculty } from "@/types";
 
-const hotspotPositions: Partial<Record<Faculty, { top: string; left: string }>> = {
+const hotspotPositions: Record<string, { top: string; left: string }> = {
   mind:       { top: "13%", left: "50%" },
   eyes:       { top: "18%", left: "66%" },
   ears:       { top: "24%", left: "72%" },
