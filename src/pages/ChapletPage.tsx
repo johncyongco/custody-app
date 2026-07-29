@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Feather } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const invocations = [
@@ -99,7 +99,7 @@ export default function ChapletPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-4 shadow-lg shadow-violet-500/20">
-              <Sparkles size={20} className="text-white" />
+              <Feather size={20} className="text-white" />
             </div>
             <h1 className="text-h1 text-text mb-2">Chaplet of the Holy Spirit</h1>
             <p className="text-body text-text-secondary leading-relaxed mb-6">
@@ -254,7 +254,7 @@ export default function ChapletPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-4 mx-auto shadow-lg shadow-violet-500/20">
-              <Sparkles size={20} className="text-white" />
+              <Feather size={20} className="text-white" />
             </div>
             <h2 className="text-h2 text-text text-center mb-6">Chaplet Complete</h2>
 

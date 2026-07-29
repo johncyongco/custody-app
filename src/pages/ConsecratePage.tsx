@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { X, BookHeart, Flame, ChevronRight, Church, ArrowLeft, Sparkles } from "lucide-react";
+import { X, BookHeart, Flame, ChevronRight, Church, ArrowLeft, Feather } from "lucide-react";
 import { holySymbols } from "@/data/holy-symbols";
 import type { HolySymbol } from "@/types";
 export default function ConsecratePage() {
@@ -183,7 +183,7 @@ export default function ConsecratePage() {
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center">
-                <Sparkles size={14} className="text-violet-600" />
+                <Feather size={14} className="text-violet-600" />
               </div>
               <div>
                 <span className="label-trace block">Chaplet of the Holy Spirit</span>

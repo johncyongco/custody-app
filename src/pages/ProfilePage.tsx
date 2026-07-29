@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bookmark, BookOpen, Heart, BarChart3, Settings, User, ChevronRight, CheckCircle, Church, ArrowLeft } from "lucide-react";
+import { Bookmark, BookOpen, Heart, BarChart3, Settings, User, ChevronRight, CheckCircle, Church, ArrowLeft, ArrowRight, Globe } from "lucide-react";
 import { useUIStore } from "@/stores/ui-store";
 import { useTraceStore, computeDailyFaithfulness } from "@/stores/trace-store";
 import { faculties } from "@/data/faculties";
@@ -28,6 +28,13 @@ const menuSections = [
     label: "Settings",
     items: [
       { icon: Settings, label: "Settings", color: "text-text-muted", href: "" },
+    ],
+  },
+  {
+    label: "Useful Resources",
+    items: [
+      { icon: Globe, label: "Interior Castle App", color: "text-holy-periwinkle", href: "https://interior-castle.vercel.app/", external: true },
+      { icon: Globe, label: "Agapetoi Self Knowledge App", color: "text-holy-periwinkle", href: "https://agapetoi.vercel.app/", external: true },
     ],
   },
 ];
@@ -164,7 +171,13 @@ export default function ProfilePage() {
                 return (
                   <button
                     key={item.label}
-                    onClick={() => item.href && navigate(item.href)}
+                    onClick={() => {
+                      if ((item as any).external) {
+                        window.open(item.href, "_blank");
+                      } else if (item.href) {
+                        navigate(item.href);
+                      }
+                    }}
                     className="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl hover:bg-white/50 transition-all duration-200 group"
                   >
                     <div className="w-8 h-8 rounded-full bg-sky-mist/50 flex items-center justify-center">
@@ -173,7 +186,11 @@ export default function ProfilePage() {
                     <span className="text-body text-text flex-1 text-left font-medium">
                       {item.label}
                     </span>
-                    <ChevronRight size={16} className="text-text-muted group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
+                    {(item as any).external ? (
+                      <ArrowRight size={16} className="text-text-muted group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
+                    ) : (
+                      <ChevronRight size={16} className="text-text-muted group-hover:translate-x-0.5 transition-transform" strokeWidth={1.5} />
+                    )}
                   </button>
                 );
               })}
@@ -181,14 +198,22 @@ export default function ProfilePage() {
           </motion.div>
         ))}
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center text-caption text-text-muted mt-8 mb-6"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="glass-card mb-6"
         >
-          TRACE · Temple of the Holy Spirit
-        </motion.p>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
+              <Heart size={14} className="text-holy-periwinkle" />
+            </div>
+            <span className="label-trace">About Custody</span>
+          </div>
+          <p className="text-body text-text-secondary leading-relaxed">
+            Custody is a spiritual formation app for consecrating every faculty of your being to the Holy Spirit. Rooted in the Catholic tradition of custody of the senses and the seven gifts of the Holy Spirit, it guides you in guarding your heart, mind, and body as a living temple of God.
+          </p>
+        </motion.div>
       </div>
     </div>
   );
