@@ -1,20 +1,25 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Music, X, ChevronRight, Languages, ArrowLeft } from "lucide-react";
+import { BookOpen, Music, X, ChevronRight, Languages, ArrowLeft, ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { praiseLanguages } from "@/data/book-of-praise";
 import type { LanguagePrayer } from "@/data/book-of-praise";
 
 const hymns = [
-  { title: "Veni Creator Spiritus", language: "Latin", tradition: "Gregorian Chant", description: "Come, Creator Spirit — the quintessential hymn to the Holy Spirit, sung at Pentecost and ordinations." },
-  { title: "Veni Sancte Spiritus", language: "Latin", tradition: "Gregorian Sequence", description: "The Golden Sequence — the Pentecost sequence hymn, attributed to Stephen Langton or Innocent III." },
-  { title: "Te Deum", language: "Latin", tradition: "Western Chant", description: "We praise You, God — an ancient hymn of praise attributed to Saints Ambrose and Augustine." },
-  { title: "Exsultet", language: "Latin", tradition: "Easter Proclamation", description: "The Easter proclamation sung at the Easter Vigil, declaring Christ's victory over death." },
-  { title: "Agios O Theos", language: "Greek", tradition: "Eastern Orthodox", description: "Holy God, Holy Mighty, Holy Immortal — the Trisagion hymn of the Eastern tradition." },
-  { title: "Cherubic Hymn", language: "Greek", tradition: "Byzantine", description: "The hymn of the Cherubim, sung during the Great Entrance in the Divine Liturgy." },
+  { title: "Veni Creator Spiritus", language: "Latin", tradition: "Gregorian Chant", description: "Come, Creator Spirit — the quintessential hymn to the Holy Spirit, sung at Pentecost and ordinations.", url: "https://www.youtube.com/watch?v=FQ7aG8v8iQ8" },
+  { title: "Veni Sancte Spiritus", language: "Latin", tradition: "Gregorian Sequence", description: "The Golden Sequence — the Pentecost sequence hymn, attributed to Stephen Langton or Innocent III.", url: "https://www.youtube.com/watch?v=NVj-C6VG90g" },
+  { title: "Te Deum", language: "Latin", tradition: "Western Chant", description: "We praise You, God — an ancient hymn of praise attributed to Saints Ambrose and Augustine.", url: "https://www.youtube.com/watch?v=Sj4xA7bnTNg" },
+  { title: "Exsultet", language: "Latin", tradition: "Easter Proclamation", description: "The Easter proclamation sung at the Easter Vigil, declaring Christ's victory over death.", url: "https://www.youtube.com/watch?v=hEa_75sasGY" },
 ];
 
 type Tab = "prayers" | "hymns" | "languages";
+
+function getYouTubeId(url: string) {
+  const match = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : null;
+}
+
+type Hymn = (typeof hymns)[number];
 
 export default function BookOfPraisePage() {
   const navigate = useNavigate();
@@ -22,6 +27,7 @@ export default function BookOfPraisePage() {
   const [selected, setSelected] = useState<LanguagePrayer | null>(null);
   const [prayerType, setPrayerType] = useState<"ourFather" | "hailMary" | "gloryBe">("ourFather");
   const [romanized, setRomanized] = useState(false);
+  const [playingHymn, setPlayingHymn] = useState<Hymn | null>(null);
 
   return (
     <div className="min-h-screen pb-28">
@@ -126,9 +132,16 @@ export default function BookOfPraisePage() {
                         <p className="text-small font-semibold text-holy-periwinkle mb-1">
                           {hymn.language} · {hymn.tradition}
                         </p>
-                        <p className="text-body text-text-secondary">
+                        <p className="text-body text-text-secondary mb-2">
                           {hymn.description}
                         </p>
+                        <button
+                          onClick={() => setPlayingHymn(hymn)}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-holy-periwinkle hover:text-holy-periwinkle/80 transition-colors"
+                        >
+                          <ExternalLink size={12} strokeWidth={1.5} />
+                          Listen on YouTube
+                        </button>
                       </div>
                     </div>
                   </motion.div>
@@ -237,6 +250,60 @@ export default function BookOfPraisePage() {
               <div className="rounded-2xl bg-white/40 p-5 border border-white/40">
                 <p className="text-body text-text-secondary leading-relaxed text-center" style={{ fontStyle: "normal" }}>
                   {romanized && selected.transliteration ? selected.transliteration[prayerType] : selected[prayerType]}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {playingHymn && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          >
+            <div className="absolute inset-0 bg-text/10 backdrop-blur-[2px]" onClick={() => setPlayingHymn(null)} />
+            <motion.div
+              key={playingHymn.title}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.4 }}
+              className="relative z-10 w-full max-w-lg glass-card rounded-[36px] overflow-hidden"
+            >
+              <div className="flex items-center justify-between p-6 pb-4">
+                <div>
+                  <h2 className="text-h2 text-text">{playingHymn.title}</h2>
+                  <p className="text-small font-semibold text-holy-periwinkle">{playingHymn.language} · {playingHymn.tradition}</p>
+                </div>
+                <button
+                  onClick={() => setPlayingHymn(null)}
+                  className="p-1.5 text-text-muted hover:text-text-secondary transition-colors rounded-full hover:bg-white/50"
+                >
+                  <X size={18} strokeWidth={1.5} />
+                </button>
+              </div>
+              <div className="px-6 pb-6">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black/10">
+                  {getYouTubeId(playingHymn.url) ? (
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(playingHymn.url)}?autoplay=1`}
+                      title={playingHymn.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-text-muted text-body">
+                      Video unavailable
+                    </div>
+                  )}
+                </div>
+                <p className="text-body text-text-secondary mt-4">
+                  {playingHymn.description}
                 </p>
               </div>
             </motion.div>
