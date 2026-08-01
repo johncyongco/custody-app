@@ -70,15 +70,28 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen pb-28 relative">
-      <img src="/home-bg.png" alt="" className="absolute top-0 left-0 w-full pointer-events-none -z-10" />
-      <div className="px-6 -mt-10">
+    <div className="min-h-screen pb-28">
+      <div className="relative">
+        <img src="/home-bg.png" alt="" className="w-full pointer-events-none" />
+        <img
+          src="/logo.png"
+          alt="Custody"
+          className="absolute top-4 left-4 w-12 h-12 object-contain pointer-events-none"
+        />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-center text-center mb-10"
+          className="absolute inset-0 flex flex-col items-center justify-start text-center px-6 -mt-[36px]"
         >
+          <div
+            aria-hidden
+            className="absolute left-1/2 -translate-x-1/2 top-24 w-[130%] max-w-lg h-64 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(50% 50% at 50% 0%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.35) 35%, rgba(255,255,255,0) 100%)",
+            }}
+          />
           <div className="w-24 h-24 mb-6 relative glow-dove">
             <svg viewBox="0 0 100 100" className="w-full h-full">
               <defs>
@@ -102,22 +115,24 @@ export default function HomePage() {
             </p>
           )}
 
-          <h1 className="text-hero text-text mb-4 leading-[1.05]">
+          <h1 className="text-h1 text-[#64618E] mb-4 drop-shadow-[0_6px_24px_rgba(125,149,248,0.45)]">
             You are the Temple
             <br />
             of the Holy Spirit.
           </h1>
 
-          <p className="text-body text-text-secondary max-w-sm leading-relaxed">
+          <p className="text-body text-black max-w-sm leading-relaxed">
             Consecrate, guard, and trace every faculty of your being.
           </p>
         </motion.div>
+      </div>
 
+      <div className="px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="glass-card mb-5 mt-4"
+          className="glass-card mb-5 -mt-[84px]"
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
