@@ -132,7 +132,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="glass-card mb-5 -mt-[84px]"
+          className="glass-card relative z-10 mb-5 -mt-[84px]"
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-full bg-sky-mist flex items-center justify-center">
